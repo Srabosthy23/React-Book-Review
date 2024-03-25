@@ -12,6 +12,8 @@ import PagesToRead from './components/PagesToRead';
 import BookDetails from './components/BookDetails';
 import { Toaster } from 'react-hot-toast';
 import ErrorPage from './components/ErrorPage';
+import Library from './components/Library';
+import ReadingChallenge from './components/ReadingChallenge';
 
 
 const router = createBrowserRouter([
@@ -31,6 +33,14 @@ const router = createBrowserRouter([
       {
         path: "/pageread",
         element: <PagesToRead></PagesToRead>
+      },
+      {
+        path: "/library",
+        element: <Library></Library>,
+      },
+      {
+        path: "/readingchallenge",
+        element: <ReadingChallenge></ReadingChallenge>
       },
       {
         path: "/bookcard/:bookId",

@@ -7,6 +7,8 @@ const Navbar = () => {
         <li><NavLink to={"/"} className={({isActive}) => isActive? "text-green-500 border border-green-500 font-bold" : "font-normal"}>Home</NavLink></li>
         <li><NavLink to={"/listbook"} className={({isActive}) => isActive? "text-green-500 border border-green-500 font-bold" : "font-normal"}>Listed Books</NavLink></li>
         <li><NavLink to={"/pageread"} className={({isActive}) => isActive? "text-green-500 border border-green-500 font-bold" : "font-normal"}>Pages to Read</NavLink></li>
+        <li><NavLink to={"/library"} className={({isActive}) => isActive? "text-green-500 border border-green-500 font-bold" : "font-normal"}>Library</NavLink></li>
+        <li><NavLink to={"/readingchallenge"} className={({isActive}) => isActive? "text-green-500 border border-green-500 font-bold" : "font-normal"}>Reading Challenge</NavLink></li>
     </>
 
     return (
