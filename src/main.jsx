@@ -10,11 +10,15 @@ import Home from './components/Home';
 import ListedBooks from './components/ListedBooks';
 import PagesToRead from './components/PagesToRead';
 import BookDetails from './components/BookDetails';
+import { Toaster } from 'react-hot-toast';
+import ErrorPage from './components/ErrorPage';
+
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Layout></Layout>,
+    errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
         path: "/",
@@ -41,5 +45,6 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <RouterProvider router={router} />
+    <Toaster />
   </React.StrictMode>,
 )
