@@ -2,13 +2,15 @@ import { useEffect, useState } from "react";
 import { Link, useLoaderData } from "react-router-dom";
 import ReadBooks from "./ReadBooks";
 import { getBooks } from "./Utility/localstorage";
+import WishlistBooks from "./WishlistBooks";
 
 const ListedBooks = () => {
 
     const bookList = useLoaderData();
 
     const [bookReads, setBookReads] = useState([]);
-
+    const [bookWishlist, setBookWishlist] = useState([]);
+    
     useEffect(() => {
         const readBook = getBooks();
         if (bookList.length > 0) {
@@ -19,6 +21,20 @@ const ListedBooks = () => {
                     bookRead.push(book)
                 }
                 setBookReads(bookRead)
+            }
+        }
+    },[bookList])
+
+    useEffect(() =>{
+        const wishlistBook = getBooks();
+        if(bookList.length > 0) {
+            const bookWishlist = [];
+            for(const id of wishlistBook){
+                const book = bookList.find(book => book.bookId === id.bookId);
+                if(book){
+                    bookWishlist.push(book)
+                }
+                setBookWishlist(bookWishlist)
             }
         }
     },[bookList])
@@ -59,6 +75,12 @@ const ListedBooks = () => {
                         key = {book.bookId}
                         book = {book}
                         ></ReadBooks>)
+                }
+                {
+                    bookWishlist.map(book => <WishlistBooks
+                        key = {book.bookId}
+                        book = {book}
+                        ></WishlistBooks>)
                 }
             </div>
 

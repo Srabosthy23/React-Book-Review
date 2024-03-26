@@ -5,13 +5,13 @@ import { saveBooks, saveBooks2 } from "./Utility/localstorage";
 const BookDetails = () => {
 
     const books = useLoaderData();
-    const {bookId} = useParams();
+    const { bookId } = useParams();
     const intId = parseInt(bookId)
     const book = books.find(book => book.bookId === intId)
     console.log(book)
 
-    
-    const handleRead = (book) =>{
+
+    const handleRead = (book) => {
         saveBooks(book)
     }
 
@@ -31,7 +31,16 @@ const BookDetails = () => {
                     <p>{book.category}</p>
                     <hr />
                     <p><span className="font-bold">review:</span> {book.review}</p>
-                    <p><span className="font-bold">Tag: </span> <button className="btn text-green-500 font-bold rounded-full">#{book.tags}</button></p>
+                    <p><span className='font-bold mr-4'>Tags:</span>{book.tags &&
+                        book.tags.map(tag => (
+                            <a
+                                key={tag}
+                                href='#'
+                                className='px-5 btn mr-4 rounded-full text-green-500 hover:underline '>
+                                #{tag}
+                            </a>
+                        ))}
+                    </p>
                     <hr />
                     <div className="grid grid-cols-2 lg:w-2/3">
                         <p>Number of Pages:</p>
@@ -52,10 +61,10 @@ const BookDetails = () => {
                         <p>Rating: </p>
                         <p className="font-bold">{book.rating}</p>
                     </div>
-                   
+
                     <div className="flex gap-5">
-                        <button onClick={() =>handleRead(book) } className="btn font-bold text-lg px-8 hover:bg-green-500 hover:text-white">Read</button>
-                        <button onClick={() => handleWishlist(book) } className="btn font-bold text-lg text-white bg-sky-400 hover:text-black hover:bg-sky-400">Wishlist</button>
+                        <button onClick={() => handleRead(book)} className="btn font-bold text-lg px-8 hover:bg-green-500 hover:text-white">Read</button>
+                        <button onClick={() => handleWishlist(book)} className="btn font-bold text-lg text-white bg-sky-400 hover:text-black hover:bg-sky-400">Wishlist</button>
                     </div>
                 </div>
             </div>
