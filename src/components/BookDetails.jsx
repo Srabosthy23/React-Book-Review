@@ -5,7 +5,7 @@ import { saveBooks, saveBooks2 } from "./Utility/localstorage";
 const BookDetails = () => {
 
     const books = useLoaderData();
-    console.log(books)
+    // console.log(books)
     const { bookId } = useParams();
     const intId = parseInt(bookId)
     const book = books.find(book => book.bookId === intId)

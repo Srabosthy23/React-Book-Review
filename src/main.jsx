@@ -36,11 +36,12 @@ const router = createBrowserRouter([
           {
             index: true,
             element: <ReadBooks></ReadBooks>,
-            loader: () => fetch("fakeData.json")
+            loader: () => fetch("fakeData.json"),
           },
           {
             path: "wishlistbook",
-            element: <WishlistBooks></WishlistBooks>
+            element: <WishlistBooks></WishlistBooks>,
+            loader: () => fetch("fakeData.json"),
           }
         ]
       },

@@ -10,13 +10,13 @@ const ReadBooks = () => {
 
     const bookList = useLoaderData();
     // console.log(bookList.length)
-    console.log(bookList)
+    // console.log(bookList)
 
     const [bookReads, setBookReads] = useState([]);
 
     useEffect(() => {
         const readBook = getBooks();
-        console.log(readBook)
+        // console.log(readBook)
         if (bookList.length > 0) {
             const bookRead = [];
             for (const id of readBook) {
@@ -31,9 +31,7 @@ const ReadBooks = () => {
     }, [bookList])
 
     // navigate
-    const singleBook = bookList.map(book => book.bookId)
-    console.log(singleBook)
-
+    
     let navigate = useNavigate();
     const handleViewList = (bookId) => {
         console.log(bookId)
