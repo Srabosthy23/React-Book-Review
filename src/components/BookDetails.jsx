@@ -4,6 +4,13 @@ import { saveBooks, saveBooks2 } from "./Utility/localstorage";
 
 const BookDetails = () => {
 
+    const books = useLoaderData();
+    const {bookId} = useParams();
+    const intId = parseInt(bookId)
+    const book = books.find(book => book.bookId === intId)
+    console.log(book)
+
+    
     const handleRead = (book) =>{
         saveBooks(book)
     }
@@ -12,15 +19,9 @@ const BookDetails = () => {
         saveBooks2(book)
     }
 
-    const books = useLoaderData();
-    const {bookId} = useParams();
-    const intId = parseInt(bookId)
-    const book = books.find(book => book.bookId === intId)
-    console.log(book)
-
     return (
         <div>
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 mt-10 mb-10 ">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 mt-10 mb-10">
                 <div className="flex flex-grow">
                     <img className="h-[530px] shadow-lg p-20 bg-base-200" src={book.image} alt="" />
                 </div>

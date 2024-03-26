@@ -16,7 +16,6 @@ import Review from './components/Review';
 import FaqAboutBook from './components/FaqAboutBook';
 
 
-
 const router = createBrowserRouter([
   {
     path: "/",
@@ -29,7 +28,8 @@ const router = createBrowserRouter([
       },
       {
         path: "/listbook",
-        element: <ListedBooks></ListedBooks>
+        element: <ListedBooks></ListedBooks>,
+        loader: () => fetch("fakeData.json"),
       },
       {
         path: "/pageread",

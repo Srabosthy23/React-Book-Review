@@ -10,8 +10,23 @@ export const getBooks = () => {
     return books;
 }
 
-// saveBooks
+// saveBooks (for read button)
 export const saveBooks = (book) =>{
+    let books = getBooks();
+    const isExist = books.find(b => b.bookId === book.bookId)
+    
+    if(isExist){
+        // localStorage.removeItem(isExist)
+        return toast.error("You Have Already Read This Book")
+    }
+    books.push(book)
+    localStorage.setItem("books", JSON.stringify(books))
+    toast.success('Books added to Read List')
+
+}
+
+// savebooks2 (for wishlist button)
+export const saveBooks2 = (book) =>{
     let books = getBooks();
     const isExist = books.find(b => b.bookId === book.bookId)
     if(isExist){
@@ -19,17 +34,12 @@ export const saveBooks = (book) =>{
     }
     books.push(book)
     localStorage.setItem("books", JSON.stringify(books))
-    toast.success('Books added to Read List')
+    toast.success('Books added to WishList')
 }
 
-// savebooks2
-export const saveBooks2 = (book) =>{
+// removeItem
+export const removeBook = (book) =>{
     let books = getBooks();
-    const isExist = books.find(b => b.bookId === book.bookId)
-    if(isExist){
-        return toast.error("You Have Already Wishlisted This Book")
-    }
-    books.push(book)
-    localStorage.setItem("books", JSON.stringify(books))
-    toast.success('Books added to WishList')
+    const remaining = books.filter(b => b.bookId !== book.bookId)
+    localStorage.setItem('books', JSON.stringify(remaining))
 }
