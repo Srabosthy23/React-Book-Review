@@ -1,22 +1,22 @@
 import toast from 'react-hot-toast';
 
-// getBooks
+// getBooks 
 export const getBooks = () => {
     let books = [];
     const storedBooks = localStorage.getItem('books')
-    if(storedBooks){
+    if (storedBooks) {
         books = JSON.parse(storedBooks)
     }
     return books;
 }
 
+
 // saveBooks (for read button)
-export const saveBooks = (book) =>{
+export const saveBooks = (book) => {
     let books = getBooks();
     const isExist = books.find(b => b.bookId === book.bookId)
-    
-    if(isExist){
-        // localStorage.removeItem(isExist)
+
+    if (isExist) {
         return toast.error("You Have Already Read This Book")
     }
     books.push(book)
@@ -26,20 +26,23 @@ export const saveBooks = (book) =>{
 }
 
 // savebooks2 (for wishlist button)
-export const saveBooks2 = (book) =>{
+export const saveBooks2 = (book) => {
     let books = getBooks();
     const isExist = books.find(b => b.bookId === book.bookId)
-    if(isExist){
+    if (isExist) {
         return toast.error("You Have Already Read This Book")
     }
+
     books.push(book)
     localStorage.setItem("books", JSON.stringify(books))
     toast.success('Books added to WishList')
+
 }
 
 // removeItem
-export const removeBook = (book) =>{
+export const removeBook = (bookId) => {
+    console.log(bookId)
     let books = getBooks();
-    const remaining = books.filter(b => b.bookId !== book.bookId)
+    const remaining = books.filter(b => b.bookId !== bookId)
     localStorage.setItem('books', JSON.stringify(remaining))
 }

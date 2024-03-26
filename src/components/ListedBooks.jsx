@@ -1,43 +1,36 @@
-import { useEffect, useState } from "react";
-import { Link, useLoaderData } from "react-router-dom";
-import ReadBooks from "./ReadBooks";
-import { getBooks } from "./Utility/localstorage";
-import WishlistBooks from "./WishlistBooks";
+import { useState } from "react";
+import { Link, Outlet} from "react-router-dom";
+
 
 const ListedBooks = () => {
 
-    const bookList = useLoaderData();
+    // const bookList = useLoaderData();
+    // console.log(bookList)
 
-    const [bookReads, setBookReads] = useState([]);
-    const [bookWishlist, setBookWishlist] = useState([]);
-    
-    useEffect(() => {
-        const readBook = getBooks();
-        if (bookList.length > 0) {
-            const bookRead = [];
-            for (const id of readBook) {
-                const book = bookList.find(book => book.bookId === id.bookId);
-                if (book) {
-                    bookRead.push(book)
-                }
-                setBookReads(bookRead)
-            }
-        }
-    },[bookList])
+    // const [bookReads, setBookReads] = useState([]);
 
-    useEffect(() =>{
-        const wishlistBook = getBooks();
-        if(bookList.length > 0) {
-            const bookWishlist = [];
-            for(const id of wishlistBook){
-                const book = bookList.find(book => book.bookId === id.bookId);
-                if(book){
-                    bookWishlist.push(book)
-                }
-                setBookWishlist(bookWishlist)
-            }
-        }
-    },[bookList])
+    // useEffect(() => {
+    //     const readBook = getBooks();
+    //     if (bookList.length > 0) {
+    //         const bookRead = [];
+    //         for (const id of readBook) {
+    //             const book = bookList.find(book => book.bookId === id.bookId);
+    //             if (book) {
+    //                 bookRead.push(book)
+    //             }
+    //             setBookReads(bookRead)
+    //         }
+    //     }
+    // }, [bookList])
+
+    // const singleBook = bookList.map(book => book.bookId)
+    // console.log(singleBook)
+
+    // let navigate = useNavigate();
+    // const handleViewList = () => {
+    //     let path = `/bookcard/${singleBook}`;
+    //     navigate(path);
+    // }
 
     const [tabIndex, setTabIndex] = useState(0)
 
@@ -62,32 +55,16 @@ const ListedBooks = () => {
 
             {/* tabs */}
             <div>
-                <div role="tablist" className="tabs tabs-lifted w-1/4">
-                    <Link onClick={() => setTabIndex(0)} role="tab" className={`flex tab cursor-pointer items-center flex-shrink-0 px-5 py-3 space-x-2 ${tabIndex === 0 ? 'border font-medium tab-active border-b-0' : 'border-b'}`}>Read Books</Link>
-                    <Link onClick={() => setTabIndex(1)} role="tab" className={`flex tab cursor-pointer items-center flex-shrink-0 px-5 py-3 space-x-2 ${tabIndex === 1 ? 'border font-medium tab-active border-b-0' : 'border-b'}`}>Wishlist Books</Link>
+                <div role="tablist" className="tabs tabs-lifted lg:w-1/4">
+                    <Link to={``} onClick={() => setTabIndex(0)} role="tab" className={`flex tab cursor-pointer items-center  px-5 py-3 space-x-2 ${tabIndex === 0 ? 'border font-medium tab-active border-b-0' : 'border-b'}`}>Read Books</Link>
+                    <Link to={`wishlistbook`} onClick={() => setTabIndex(1)} role="tab" className={`flex tab cursor-pointer items-center px-5 py-3 space-x-2 ${tabIndex === 1 ? 'border font-medium tab-active border-b-0' : 'border-b'}`}>Wishlist Books</Link>
 
                 </div>
             </div>
-
-            <div className="grid grid-cols-1 gap-3 mt-5">
-                {
-                    bookReads.map(book => <ReadBooks 
-                        key = {book.bookId}
-                        book = {book}
-                        ></ReadBooks>)
-                }
-                {
-                    bookWishlist.map(book => <WishlistBooks
-                        key = {book.bookId}
-                        book = {book}
-                        ></WishlistBooks>)
-                }
-            </div>
-
+            {/* map */}
+            
+            <Outlet></Outlet>    
         </div>
-
-
-
     );
 };
 

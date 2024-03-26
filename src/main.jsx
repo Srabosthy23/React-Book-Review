@@ -14,6 +14,8 @@ import { Toaster } from 'react-hot-toast';
 import ErrorPage from './components/ErrorPage';
 import Review from './components/Review';
 import FaqAboutBook from './components/FaqAboutBook';
+import ReadBooks from './components/ReadBooks';
+import WishlistBooks from './components/WishlistBooks';
 
 
 const router = createBrowserRouter([
@@ -30,6 +32,17 @@ const router = createBrowserRouter([
         path: "/listbook",
         element: <ListedBooks></ListedBooks>,
         loader: () => fetch("fakeData.json"),
+        children:[
+          {
+            index: true,
+            element: <ReadBooks></ReadBooks>,
+            loader: () => fetch("fakeData.json")
+          },
+          {
+            path: "wishlistbook",
+            element: <WishlistBooks></WishlistBooks>
+          }
+        ]
       },
       {
         path: "/pageread",
