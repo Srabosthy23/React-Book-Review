@@ -2,15 +2,17 @@ import { useEffect, useState } from "react";
 import { Link, useLoaderData} from "react-router-dom";
 import { getBooks } from "./Utility/localstorage";
 import ReadBooks from "./ReadBooks";
-
+import WishlistBooks from "./WishlistBooks";
 
 const ListedBooks = () => {
 
     const [tabIndex, setTabIndex] = useState(0)
 
     const bookList = useLoaderData();
+
     const [bookReads, setBookReads] = useState([]);
     const [displayBooks, setDisplayBooks] = useState([]);
+    
     const handleBooksFilter = filter => {
         let sortedBooks = [];
         switch (filter) {
@@ -31,7 +33,6 @@ const ListedBooks = () => {
         setDisplayBooks(sortedBooks);
     }
 
-
     useEffect(() => {
         const readBook = getBooks();
         if (bookList.length > 0) {
@@ -46,8 +47,6 @@ const ListedBooks = () => {
             }
         }
     }, [bookList])
-
-
 
     return (
         <div>
@@ -68,10 +67,6 @@ const ListedBooks = () => {
                 </details>
             </div>
 
-
-            
-
-
             {/* tabs */}
             <div>
                 <div role="tablist" className="tabs tabs-lifted lg:w-1/4">
@@ -82,15 +77,8 @@ const ListedBooks = () => {
             </div>
 
             <ReadBooks books={displayBooks} />
-            
-            {/* <ul>
-                {
-                    displayBooks.map(book =>  <Outlet key={book.bookId} book = {book}></Outlet>)  
-                }
-            </ul> */}
-
-
-            {/* <Outlet></Outlet>     */}
+            <WishlistBooks books={displayBooks}></WishlistBooks>
+           
         </div>
     );
 };

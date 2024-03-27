@@ -1,10 +1,10 @@
 import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid } from 'recharts';
-import { getBooks } from './Utility/localstorage';
+import { getReadBooks } from './Utility/localstorage';
 import PropTypes from 'prop-types';
 
 const PagesToRead = () => {
     
-        const readBook = getBooks();
+        const readBook = getReadBooks();
         console.log(readBook)
         // const {bookName, totalPages} = readBook;
     

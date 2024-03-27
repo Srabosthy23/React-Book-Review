@@ -1,5 +1,5 @@
 import { useLoaderData, useParams } from "react-router-dom";
-import { saveBooks, saveBooks2 } from "./Utility/localstorage";
+import { saveReadBooks, saveWishlistBooks } from "./Utility/localstorage";
 // import toast from 'react-hot-toast';
 
 const BookDetails = () => {
@@ -11,14 +11,14 @@ const BookDetails = () => {
     const book = books.find(book => book.bookId === intId)
     // console.log(book)
 
-
+    // handle read button
     const handleRead = (book) => {
-        saveBooks(book)
+        saveReadBooks(book)
         
     }
-
+    // handle wishlist button
     const handleWishlist = (book) => {
-        saveBooks2(book)
+        saveWishlistBooks(book)
     }
 
     return (

@@ -5,8 +5,9 @@ import { useNavigate } from "react-router-dom";
 import PropTypes from 'prop-types';
 
 const ReadBooks = ({ books }) => {
+    
+    // navigate to bookdetails
     let navigate = useNavigate();
-
     const handleViewList = (bookId) => {
         let path = `/bookcard/${bookId}`;
         navigate(path);
