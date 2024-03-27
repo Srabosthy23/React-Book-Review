@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import PropTypes from 'prop-types';
 
 const WishlistBooks = ({ books }) => {
+    console.log(books)
 
     // navigate to bookdetails
     let navigate = useNavigate();
