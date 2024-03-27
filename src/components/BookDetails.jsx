@@ -5,11 +5,10 @@ import { saveReadBooks, saveWishlistBooks } from "./Utility/localstorage";
 const BookDetails = () => {
 
     const books = useLoaderData();
-    // console.log(books)
+
     const { bookId } = useParams();
     const intId = parseInt(bookId)
     const book = books.find(book => book.bookId === intId)
-    // console.log(book)
 
     // handle read button
     const handleRead = (book) => {
