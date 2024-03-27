@@ -1,38 +1,53 @@
-import { useState } from "react";
-import { Link, Outlet} from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useLoaderData} from "react-router-dom";
+import { getBooks } from "./Utility/localstorage";
+import ReadBooks from "./ReadBooks";
 
 
 const ListedBooks = () => {
 
-    // const bookList = useLoaderData();
-    // console.log(bookList)
-
-    // const [bookReads, setBookReads] = useState([]);
-
-    // useEffect(() => {
-    //     const readBook = getBooks();
-    //     if (bookList.length > 0) {
-    //         const bookRead = [];
-    //         for (const id of readBook) {
-    //             const book = bookList.find(book => book.bookId === id.bookId);
-    //             if (book) {
-    //                 bookRead.push(book)
-    //             }
-    //             setBookReads(bookRead)
-    //         }
-    //     }
-    // }, [bookList])
-
-    // const singleBook = bookList.map(book => book.bookId)
-    // console.log(singleBook)
-
-    // let navigate = useNavigate();
-    // const handleViewList = () => {
-    //     let path = `/bookcard/${singleBook}`;
-    //     navigate(path);
-    // }
-
     const [tabIndex, setTabIndex] = useState(0)
+
+    const bookList = useLoaderData();
+    const [bookReads, setBookReads] = useState([]);
+    const [displayBooks, setDisplayBooks] = useState([]);
+    const handleBooksFilter = filter => {
+        let sortedBooks = [];
+        switch (filter) {
+            case 'rating':
+                sortedBooks = [...bookReads].sort((a, b) => b.rating - a.rating);
+                console.log(sortedBooks)
+                break;
+            case 'pages':
+                sortedBooks = [...bookReads].sort((a, b) => b.totalPages - a.totalPages);
+                break;
+            case 'publishedyear':
+                sortedBooks = [...bookReads].sort((a, b) => b.yearOfPublishing - a.yearOfPublishing);
+                break;
+            default:
+                sortedBooks = [...bookReads];
+                break;
+        }
+        setDisplayBooks(sortedBooks);
+    }
+
+
+    useEffect(() => {
+        const readBook = getBooks();
+        if (bookList.length > 0) {
+            const bookRead = [];
+            for (const id of readBook) {
+                const book = bookList.find(book => book.bookId === id.bookId);
+                if (book) {
+                    bookRead.push(book)
+                }
+                setBookReads(bookRead)
+                setDisplayBooks(bookRead)
+            }
+        }
+    }, [bookList])
+
+
 
     return (
         <div>
@@ -46,12 +61,16 @@ const ListedBooks = () => {
                 <details className="dropdown mb-36">
                     <summary className="m-1 btn bg-green-500 text-white hover:bg-green-400">Sort By</summary>
                     <ul className="p-2 space-y-1 shadow menu  dropdown-content z-[1] rounded-box w-52">
-                        <li><a className=" border-b border-green-500">Rating</a></li>
-                        <li><a className=" border-b border-green-500">Number of Pages</a></li>
-                        <li><a className=" border-b border-green-500">published Year</a></li>
+                        <li onClick={() => handleBooksFilter('rating')}><a className=" border-b border-green-500">Rating</a></li>
+                        <li onClick={() => handleBooksFilter('pages')}><a className=" border-b border-green-500">Number of Pages</a></li>
+                        <li onClick={() => handleBooksFilter('publishedyear')}><a className=" border-b border-green-500">published Year</a></li>
                     </ul>
                 </details>
             </div>
+
+
+            
+
 
             {/* tabs */}
             <div>
@@ -61,9 +80,17 @@ const ListedBooks = () => {
 
                 </div>
             </div>
-            {/* map */}
+
+            <ReadBooks books={displayBooks} />
             
-            <Outlet></Outlet>    
+            {/* <ul>
+                {
+                    displayBooks.map(book =>  <Outlet key={book.bookId} book = {book}></Outlet>)  
+                }
+            </ul> */}
+
+
+            {/* <Outlet></Outlet>     */}
         </div>
     );
 };

@@ -40,9 +40,9 @@ export const saveBooks2 = (book) => {
 }
 
 // removeItem
-export const removeBook = (bookId) => {
-    console.log(bookId)
-    let books = getBooks();
-    const remaining = books.filter(b => b.bookId !== bookId)
-    localStorage.setItem('books', JSON.stringify(remaining))
-}
+// export const removeBook = (bookId) => {
+//     console.log(bookId)
+//     let books = getBooks();
+//     const remaining = books.filter(b => b.bookId !== bookId)
+//     localStorage.setItem('books', JSON.stringify(remaining))
+// }
