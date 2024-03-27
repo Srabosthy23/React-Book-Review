@@ -31,7 +31,7 @@ const router = createBrowserRouter([
       {
         path: "/listbook",
         element: <ListedBooks></ListedBooks>,
-        loader: () => fetch("fakeData.json"),
+        loader: () => fetch("/fakeData.json"),
         children:[
           {
             index: true,
@@ -59,7 +59,7 @@ const router = createBrowserRouter([
       {
         path: "/bookcard/:bookId",
         element: <BookDetails></BookDetails>,
-        loader: () => fetch("fakeData.json")
+        loader: () => fetch("/fakeData.json")
       }
     ]
   },
