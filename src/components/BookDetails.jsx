@@ -1,6 +1,5 @@
 import { useLoaderData, useParams } from "react-router-dom";
 import { saveReadBooks, saveWishlistBooks } from "./Utility/localstorage";
-// import toast from 'react-hot-toast';
 
 const BookDetails = () => {
 

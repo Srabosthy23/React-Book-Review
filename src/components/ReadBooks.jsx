@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 
 const ReadBooks = ({ books }) => {
     console.log(books)
+    
     // navigate to bookdetails
     let navigate = useNavigate();
     const handleViewList = (bookId) => {

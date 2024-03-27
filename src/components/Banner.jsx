@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 
 const Banner = () => {
 
+    // use navigate to booklist
     let navigate = useNavigate();
     const handleViewList = () =>{
         let path = "/listbook";
